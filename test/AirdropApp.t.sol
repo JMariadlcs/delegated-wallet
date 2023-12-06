@@ -14,7 +14,6 @@ contract TestAirdropApp is Test {
 
     address coldWallet = 0xC5b9C0549136A7eC4a2270f56afbC29002223F51; // Cold Wallet: wallet that contains the ERC721 tokens
     address hotWallet = 0xe371cDd686341baDbE337D21c53fA51Db505e361; // Wallet that is going to be used as hot wallet 
-    address ERC721ContractAddress = 0x3768a0c3d522125f828a3E9F5cA225E4F63fFDb8; // Invented
     uint256 aidropTokenAmount = 100e18;
     uint256 tokenId = 0;
 
@@ -35,6 +34,17 @@ contract TestAirdropApp is Test {
         vm.prank(coldWallet);
         airdropApp.claimAirdrop();
         assert(airdropApp.balanceOf(coldWallet) == aidropTokenAmount);
+    }
+
+    function testHotWalletClaimAirdropAfterBeingDelegatedCorrectly() public {
+        vm.prank(coldWallet);
+
+        delegationIndexer.ERC721Delegation(hotWallet, address(mockERC721), tokenId, true);
+        vm.stopPrank();
+        vm.prank(hotWallet);
+
+        airdropApp.claimAirdrop();
+        assert(airdropApp.balanceOf(hotWallet) == aidropTokenAmount);
     }
 
 
