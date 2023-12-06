@@ -13,7 +13,7 @@ contract DelegationIndex {
     }
 
     /// @notice Records if a delegationHash from a delegator is active or not delegator => delegationHash => isActive
-    mapping(address => mapping(bytes32 => bool)) ERC721Delegations;
+    mapping(address => mapping(bytes32 => bool)) public ERC721Delegations;
 
     event ERC721Delegated(address indexed from, address indexed to, address indexed contractAddress, uint256 tokenId);
 
