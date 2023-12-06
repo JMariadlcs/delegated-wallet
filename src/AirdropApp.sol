@@ -6,6 +6,8 @@ import "../lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol";
 import "../lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol";
 import "./interfaces/IDelegationIndexer.sol";
 
+import "forge-std/console.sol";
+
 error NotElegible();
 
 contract AirdropApp is ERC20 {
@@ -30,8 +32,9 @@ contract AirdropApp is ERC20 {
 
     function claimAirdrop() external {
         address ERC721Owner = ERC721(ERC721ContractAddress).ownerOf(tokenId);
+        
         if (
-            msg.sender != ERC721Owner ||
+            msg.sender != ERC721Owner &&
             !IDelegationIndexer(delegationIndexerAddress).checkERC721Delegation(
                 ERC721Owner,
                 msg.sender,
