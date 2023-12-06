@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 
 pragma solidity ^0.8.20;
-
 contract DelegationIndex {
 
     /// @notice Struct for ERC 721 token delegations
@@ -17,10 +16,11 @@ contract DelegationIndex {
 
     event ERC721Delegated(address indexed from, address indexed to, address indexed contractAddress, uint256 tokenId);
 
-    function ERC721Delegation(address to, address contractAddress, uint256 tokenId, bool activeDelegation) external {
-        bytes32 hash =  keccak256(abi.encode(msg.sender, to, contractAddress, tokenId));
-        if (activeDelegation) ERC721Delegations[msg.sender][hash] = true;
-        else ERC721Delegations[msg.sender][hash] = false;
+    function ERC721Delegation(address to, address contractAddress, uint256 tokenId, bool activeDelegation) external returns (bytes32 ERC721DelegationHash) {
+        ERC721DelegationHash =  keccak256(abi.encode(msg.sender, to, contractAddress, tokenId));
+
+        if (activeDelegation) ERC721Delegations[msg.sender][ERC721DelegationHash] = true;
+        else ERC721Delegations[msg.sender][ERC721DelegationHash] = false;
     }
 
     function checkERC721Delegation(address from, address to, address contractAddress, uint256 tokenId) external view returns(bool delegationActive) {
