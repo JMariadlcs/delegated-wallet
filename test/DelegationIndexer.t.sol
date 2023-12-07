@@ -29,4 +29,23 @@ contract TestDelegationIndex is Test {
         assert(delegationIsActive == true);
     }
 
+    function testCheckAddedERC721Delegation() public {
+        vm.prank(coldWallet);
+        delegationIndexer.ERC721Delegation(hotWallet, ERC721ContractAddress, tokenId, true);
+        bool delegationIsActive = delegationIndexer.checkERC721Delegation(coldWallet, hotWallet, ERC721ContractAddress, tokenId);
+        assert(delegationIsActive == true);
+    }
+
+   function testRevokeERC721Delegation() public {
+        vm.prank(coldWallet);
+        delegationIndexer.ERC721Delegation(hotWallet, ERC721ContractAddress, tokenId, true);
+        bool delegationIsActive = delegationIndexer.checkERC721Delegation(coldWallet, hotWallet, ERC721ContractAddress, tokenId);
+        assert(delegationIsActive == true);
+
+        vm.prank(coldWallet);
+        delegationIndexer.ERC721Delegation(hotWallet, ERC721ContractAddress, tokenId, false);
+        delegationIsActive = delegationIndexer.checkERC721Delegation(coldWallet, hotWallet, ERC721ContractAddress, tokenId);
+        assert(delegationIsActive == false);
+    }
+
 }
