@@ -14,6 +14,24 @@ The protocol has been implemented using three main contracts:
 2. [DelegationIndexer](https://github.com/JMariadlcs/delegated-wallet/blob/main/src/DelegationIndexer.sol): This contract facilitates the delegation of an ERC721 token from one wallet to another.
 3. [AirdropApp](https://github.com/JMariadlcs/delegated-wallet/blob/main/src/AirdropApp.sol): This contract serves as the airdropper. It implements the DelegateIndexer interface to verify whether the claimer is the ERC721 owner or a wallet that has been delegated by the owner of the ERC721 token.
 
+## Technical docs
+
+The protocol enables the execution of two types of actions: delegating ERC721 tokens and verifying if an ERC721 token has been delegated.
+
+1. Delegate ERC721: for delegating ERC721 the `ERC721Delegation` must be called. [Check interface](https://github.com/JMariadlcs/delegated-wallet/blob/main/src/interfaces/IDelegationIndexer.sol)
+
+```bash
+    /** 
+     * @notice function for delegating an ERC721 token
+     * @param to HotWallet address to be delegated
+     * @param contractAddress address of the ERC721 delegated
+     * @param tokenId Id of the ERC721 token delegated
+     * @param activeDelegation trigger for active/revoke delegation
+     * @dev function returns the delegation hash generated (bytes32 type)
+     */
+    function ERC721Delegation(address to, address contractAddress, uint256 tokenId, bool activeDelegation) external returns (bytes32);
+```
+
 ## Execution example
 The objective of this chapter is to demonstrate the functionality of the designed protocol on a deployed blockchain (Mumbai).
 
