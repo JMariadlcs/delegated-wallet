@@ -1,5 +1,9 @@
 # <h1 align="center"> Delegated ERC721 wallet </h1>
 
+This repository encompasses a 'delegation system protocol'. This implies that the implemented protocol enables wallets to delegate their assets to other wallets, allowing them to act on their behalf without the delegated addresses possessing the assets. In simpler terms, this system operates without necessitating the transfer of assets from the initial addresses.
+
+This system is highly advantageous for claiming airdrops or conducting various acts that demand ownership of a specific asset, all while mitigating risks. A clear example would be a Cold Wallet holding an ERC721 token necessary for claiming a particular airdrop. Rather than directly initiating the airdrop claim with the Cold Wallet, which might pose inherent risks, the Cold Wallet delegates the ERC721 token to the Hot Wallet without transferring ownership. Consequently, the Hot Wallet gains the capability to claim the airdrop on behalf of the Cold Wallet.
+
 ## Execution example
 The objective of this chapter is to demonstrate the functionality of the designed protocol on a deployed blockchain (Mumbai).
 
