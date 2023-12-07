@@ -4,14 +4,6 @@ pragma solidity ^0.8.20;
 
 contract DelegationIndexer {
 
-    /// @notice Struct for ERC 721 token delegations
-    struct ERC721DelegationStruct {
-        address from;
-        address to;
-        address contractAddress;
-        uint256 tokenId;
-    }
-
     /// @notice Records if a delegationHash from a delegator is active or not delegator => delegationHash => isActive
     mapping(address => mapping(bytes32 => bool)) public ERC721Delegations;
 
