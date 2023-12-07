@@ -6,6 +6,14 @@ This system is highly advantageous for claiming airdrops or conducting various a
 
 Please be aware that this repository specifically showcases the implementation of the delegation mechanism for an ERC721 token. However, it is adaptable and can be easily extended to encompass any quantity of ERC20 tokens, a designated Smart Contract, or even an entire wallet.
 
+## How it works
+
+The protocol has been implemented using three main contracts:
+
+1. [MockERC721](https://github.com/JMariadlcs/delegated-wallet/blob/main/src/MockERC721.sol): This ERC721 token contract serves as the criterion for claiming the airdrop. Only the owner of the ERC721 token with ID 0, or the address delegated by the owner, is eligible to claim the airdrop, and this claim can be made only once.
+2. [DelegationIndexer](https://github.com/JMariadlcs/delegated-wallet/blob/main/src/DelegationIndexer.sol): This contract facilitates the delegation of an ERC721 token from one wallet to another.
+3. [AirdropApp](https://github.com/JMariadlcs/delegated-wallet/blob/main/src/AirdropApp.sol): This contract serves as the airdropper. It implements the DelegateIndexer interface to verify whether the claimer is the ERC721 owner or a wallet that has been delegated by the owner of the ERC721 token.
+
 ## Execution example
 The objective of this chapter is to demonstrate the functionality of the designed protocol on a deployed blockchain (Mumbai).
 
@@ -18,6 +26,25 @@ Execution steps:
 1. The Cold Wallet mints the ERC721 token with ID 0 from the MockERC721 contract previously deployed. [See tx](https://mumbai.polygonscan.com/tx/0x80ece190a62439e6831a14753b7f49e888efca93b72f78bc1d20e3a785aa024b)
 2. Subsequently, the Cold Wallet delegates the ERC721 token to the Hot Wallet, thereby enabling the Hot Wallet to act on behalf of the Cold Wallet. This delegation of the ERC721 token involves the execution of a transaction by the Cold Wallet, calling the ERC721Delegation function within the `DelegationIndexer.sol` contract. [See tx](https://mumbai.polygonscan.com/tx/0x128f5b0b0c3a719154dcc7e9e91e256cdc2f2afab812646b9576cbc2f29b8af6)
 3. Following the delegation, the Hot Wallet gains the capability to act on behalf of the Cold Wallet and claim the airdrop. [See tx](https://mumbai.polygonscan.com/tx/0xe130dac5c9b86eae4df864ce255a95fed13b0cd7a3a5ee77e1fc74686c3a931f)
+
+## Testing
+All functions in the protocol have tests implemented. To execute these tests:
+
+```bash
+forge test
+```
+
+The code has a 100% test coverage, you can check it by executing:
+
+```bash
+forge coverage
+```
+
+```bash
+| src/AirdropApp.sol                   | 100.00% (8/8)  | 100.00% (10/10) | 100.00% (4/4) | 100.00% (1/1) |
+| src/DelegationIndexer.sol            | 100.00% (5/5)  | 100.00% (6/6)   | 100.00% (2/2) | 100.00% (2/2) |
+| src/MockERC721.sol                   | 100.00% (3/3)  | 100.00% (3/3)   | 100.00% (0/0) | 100.00% (1/1) |
+```
 
 ## Contract addresses
 All contracts have been deployed on the Mumbai network (Polygon testnet). It's important to note that the addresses provided here differ from those used in the 'Execution example'. This distinction is due to the eligibility criteria for the airdrop, which applies exclusively to the ERC721 token with ID 0 and is limited to a single use. Consequently, these newly deployed contracts are intended for a one-time testing of the functionality.
