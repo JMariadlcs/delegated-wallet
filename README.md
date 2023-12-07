@@ -1,4 +1,4 @@
-# <h1 align="center"> Embedded wallet </h1>
+# <h1 align="center"> Delegated ERC721 wallet </h1>
 
 ## Execution example
 The objective of this chapter is to demonstrate the functionality of the designed protocol on a deployed blockchain (Mumbai).
