@@ -32,7 +32,7 @@ The protocol enables the execution of two types of actions: delegating ERC721 to
     function ERC721Delegation(address to, address contractAddress, uint256 tokenId, bool activeDelegation) external returns (bytes32);
 ```
 
-2. Verify ERC721 delegation: for verifying if a specific ERC721 token has been delegated to a certain address the `checkERC721Delegation` function much be called. [Check interface](https://github.com/JMariadlcs/delegated-wallet/blob/main/src/interfaces/IDelegationIndexer.sol#_16-L24)
+2. Verify ERC721 delegation: for verifying if a specific ERC721 token has been delegated to a certain address the `checkERC721Delegation` function much be called. [Check interface](https://github.com/JMariadlcs/delegated-wallet/blob/main/src/interfaces/IDelegationIndexer.sol#L16-L24)
 
 ```bash
     /** 
