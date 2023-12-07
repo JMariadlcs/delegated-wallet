@@ -15,7 +15,7 @@ contract AirdropApp is ERC20 {
     address ERC721ContractAddress;
     uint256 tokenId;
     uint256 airdropTokenAmount;
-    mapping(address => bool) alreadyClaimed;
+    mapping(uint256 => bool) alreadyClaimed;
 
     event AirdropClaimed(address receiver);
     
@@ -40,8 +40,8 @@ contract AirdropApp is ERC20 {
     /// @notice function for claiming airdrop. Owners of ERC721 and tokenId or delegated addresses by owners are elegible
     function claimAirdrop() external {
         address ERC721Owner = ERC721(ERC721ContractAddress).ownerOf(tokenId);
-        if (alreadyClaimed[ERC721Owner]) revert AlreadyClaimed();
-        
+        if (alreadyClaimed[tokenId]) revert AlreadyClaimed();
+
         if (
             msg.sender != ERC721Owner &&
             !IDelegationIndexer(delegationIndexerAddress).checkERC721Delegation(
@@ -52,7 +52,7 @@ contract AirdropApp is ERC20 {
             )
         ) revert NotElegible();
 
-        alreadyClaimed[ERC721Owner] = true;
+        alreadyClaimed[tokenId] = true;
         _mint(msg.sender, airdropTokenAmount);
         emit AirdropClaimed(msg.sender);
     }
