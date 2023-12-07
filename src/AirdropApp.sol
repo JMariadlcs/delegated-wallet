@@ -13,7 +13,7 @@ contract AirdropApp is ERC20 {
 
     address public delegationIndexerAddress;
     address public ERC721ContractAddress;
-    uint256 public tokenId;
+    uint32 public tokenId;
     uint256 public airdropTokenAmount;
     mapping(uint256 => bool) public alreadyClaimed;
 
@@ -28,7 +28,7 @@ contract AirdropApp is ERC20 {
     constructor(
         address _delegationIndexerAddress,
         address _ERC721ContractAddress,
-        uint256 _tokenId,
+        uint32 _tokenId,
         uint256 _aidropTokenAmount
     ) ERC20("AirdropApp", "ADRP") {
         delegationIndexerAddress = _delegationIndexerAddress;

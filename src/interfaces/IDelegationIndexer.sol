@@ -11,7 +11,7 @@ interface IDelegationIndexer {
      * @param activeDelegation trigger for active/revoke delegation
      * @dev function returns the delegation hash generated (bytes32 type)
      */
-    function ERC721Delegation(address to, address contractAddress, uint256 tokenId, bool activeDelegation) external returns (bytes32);
+    function ERC721Delegation(address to, address contractAddress, uint32 tokenId, bool activeDelegation) external returns (bytes32);
 
     /** 
      * @notice function for checking if an ERC721 token delegation is active
@@ -21,5 +21,5 @@ interface IDelegationIndexer {
      * @param tokenId Id of the ERC721 token delegated
      * @dev function returns a boolean indicating if the delegation is active or not
      */
-    function checkERC721Delegation(address from, address to, address contractAddress, uint256 tokenId) external view returns(bool);
+    function checkERC721Delegation(address from, address to, address contractAddress, uint32 tokenId) external view returns(bool);
 }

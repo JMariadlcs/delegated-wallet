@@ -6,8 +6,8 @@ import "../lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol";
 
 contract MockERC721 is ERC721 {
 
-    uint256 tokenId;
-    event NFTMinted(address user, uint256 tokenId);
+    uint32 tokenId;
+    event NFTMinted(address user, uint32 tokenId);
 
     constructor() ERC721("MockERC721", "M721") {
 

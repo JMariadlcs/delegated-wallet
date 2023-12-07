@@ -15,7 +15,7 @@ contract TestAirdropApp is Test {
     address coldWallet = 0xC5b9C0549136A7eC4a2270f56afbC29002223F51; // Cold Wallet: wallet that will mint and contain the ERC721 token
     address hotWallet = 0xe371cDd686341baDbE337D21c53fA51Db505e361; // Wallet that is going to be used as hot wallet 
     uint256 aidropTokenAmount = 100e18;
-    uint256 tokenId = 0;
+    uint32 tokenId = 0;
 
     function setUp() public {
         mockERC721 = new MockERC721();

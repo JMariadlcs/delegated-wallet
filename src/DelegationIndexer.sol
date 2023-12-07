@@ -8,7 +8,7 @@ contract DelegationIndexer {
     mapping(address => mapping(bytes32 => bool)) public ERC721Delegations;
 
     /// @notice Event emitted when someone delegates an ERC721 token
-    event ERC721Delegated(address indexed from, address indexed to, address indexed contractAddress, uint256 tokenId);
+    event ERC721Delegated(address indexed from, address indexed to, address indexed contractAddress, uint32 tokenId);
 
     /** 
      * @notice function for delegating an ERC721 token
@@ -18,7 +18,7 @@ contract DelegationIndexer {
      * @param activeDelegation trigger for active/revoke delegation
      * @dev function returns the delegation hash generated (bytes32 type)
      */
-    function ERC721Delegation(address to, address contractAddress, uint256 tokenId, bool activeDelegation) external returns (bytes32 ERC721DelegationHash) {
+    function ERC721Delegation(address to, address contractAddress, uint32 tokenId, bool activeDelegation) external returns (bytes32 ERC721DelegationHash) {
         ERC721DelegationHash = keccak256(abi.encode(msg.sender, to, contractAddress, tokenId));
 
         if (activeDelegation) ERC721Delegations[msg.sender][ERC721DelegationHash] = true;
@@ -33,7 +33,7 @@ contract DelegationIndexer {
      * @param tokenId Id of the ERC721 token delegated
      * @dev function returns a boolean indicating if the delegation is active or not
      */
-    function checkERC721Delegation(address from, address to, address contractAddress, uint256 tokenId) external view returns(bool delegationActive) {
+    function checkERC721Delegation(address from, address to, address contractAddress, uint32 tokenId) external view returns(bool delegationActive) {
         bytes32 hash =  keccak256(abi.encode(from, to, contractAddress, tokenId));
         delegationActive = ERC721Delegations[from][hash];
     }
