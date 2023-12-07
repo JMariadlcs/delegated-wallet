@@ -4,6 +4,8 @@ This repository encompasses a 'delegation system protocol'. This implies that th
 
 This system is highly advantageous for claiming airdrops or conducting various acts that demand ownership of a specific asset, all while mitigating risks. A clear example would be a Cold Wallet holding an ERC721 token necessary for claiming a particular airdrop. Rather than directly initiating the airdrop claim with the Cold Wallet, which might pose inherent risks, the Cold Wallet delegates the ERC721 token to the Hot Wallet without transferring ownership. Consequently, the Hot Wallet gains the capability to claim the airdrop on behalf of the Cold Wallet.
 
+Please be aware that this repository specifically showcases the implementation of the delegation mechanism for an ERC721 token. However, it is adaptable and can be easily extended to encompass any quantity of ERC20 tokens, a designated Smart Contract, or even an entire wallet.
+
 ## Execution example
 The objective of this chapter is to demonstrate the functionality of the designed protocol on a deployed blockchain (Mumbai).
 
