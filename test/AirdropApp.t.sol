@@ -30,6 +30,12 @@ contract TestAirdropApp is Test {
         assert(mockERC721.ownerOf(0) == coldWallet);
     }
 
+    function testHotWalletCanNotClaimWithoutBeingDelegated() public {
+        vm.prank(hotWallet);
+        vm.expectRevert();
+        airdropApp.claimAirdrop();
+    }
+
     function testColdWalletClaimAirdropCorrectly() public {
         vm.prank(coldWallet);
         airdropApp.claimAirdrop();
@@ -41,8 +47,8 @@ contract TestAirdropApp is Test {
 
         delegationIndexer.ERC721Delegation(hotWallet, address(mockERC721), tokenId, true);
         vm.stopPrank();
-        vm.prank(hotWallet);
 
+        vm.prank(hotWallet);
         airdropApp.claimAirdrop();
         assert(airdropApp.balanceOf(hotWallet) == aidropTokenAmount);
     }
