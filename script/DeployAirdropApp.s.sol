@@ -10,8 +10,8 @@ contract DeployAirdropApp is Script {
     function run() external returns (AirdropApp) {
         vm.startBroadcast();
 
-        address delegationIndexerAddress = 0x3D1733E1927aaAcA3711f8e3428767F4a2B71A6f; // Deployed in Mumbai
-        address mockERC721Address = 0x77d4F25Cebf15472a7d0f68c8448C04DD095e44C; // Deployed in Mumbai
+        address delegationIndexerAddress = 0x03FfF50ef7C829B1aF69dcaAd257bD9426897f41; // Deployed in Mumbai
+        address mockERC721Address = 0x9Fd12DfDe6eF24fa793C699941363d8E61E4c983; // Deployed in Mumbai
         uint256 tokenId = 0;
         uint256 airdropTokenAmount = 100e18;
         AirdropApp airdropApp = new AirdropApp(delegationIndexerAddress, mockERC721Address, tokenId, airdropTokenAmount);

@@ -11,11 +11,11 @@ error AlreadyClaimed();
 
 contract AirdropApp is ERC20 {
 
-    address delegationIndexerAddress;
-    address ERC721ContractAddress;
-    uint256 tokenId;
-    uint256 airdropTokenAmount;
-    mapping(uint256 => bool) alreadyClaimed;
+    address public delegationIndexerAddress;
+    address public ERC721ContractAddress;
+    uint256 public tokenId;
+    uint256 public airdropTokenAmount;
+    mapping(uint256 => bool) public alreadyClaimed;
 
     event AirdropClaimed(address receiver);
     
