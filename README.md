@@ -56,9 +56,10 @@ Here are the wallet addresses utilized:
 - Hot Wallet (does not contain any tokens and can claim the airdrop only if the cold wallet delegates the ERC721 to it): `0x3768a0c3d522125f828a3E9F5cA225E4F63fFDb8`.
 
 Execution steps:
-1. The Cold Wallet mints the ERC721 token with ID 0 from the MockERC721 contract previously deployed. [See tx](https://mumbai.polygonscan.com/tx/0x80ece190a62439e6831a14753b7f49e888efca93b72f78bc1d20e3a785aa024b)
-2. Subsequently, the Cold Wallet delegates the ERC721 token to the Hot Wallet, thereby enabling the Hot Wallet to act on behalf of the Cold Wallet. This delegation of the ERC721 token involves the execution of a transaction by the Cold Wallet, calling the ERC721Delegation function within the `DelegationIndexer.sol` contract. [See tx](https://mumbai.polygonscan.com/tx/0x128f5b0b0c3a719154dcc7e9e91e256cdc2f2afab812646b9576cbc2f29b8af6)
-3. Following the delegation, the Hot Wallet gains the capability to act on behalf of the Cold Wallet and claim the airdrop. [See tx](https://mumbai.polygonscan.com/tx/0xe130dac5c9b86eae4df864ce255a95fed13b0cd7a3a5ee77e1fc74686c3a931f)
+1. Get free Matics from a faucet to pay the gas. [Check faucet](https://mumbaifaucet.com/).
+2. The Cold Wallet mints the ERC721 token with ID 0 from the MockERC721 contract previously deployed. [See tx](https://mumbai.polygonscan.com/tx/0x80ece190a62439e6831a14753b7f49e888efca93b72f78bc1d20e3a785aa024b)
+3. Subsequently, the Cold Wallet delegates the ERC721 token to the Hot Wallet, thereby enabling the Hot Wallet to act on behalf of the Cold Wallet. This delegation of the ERC721 token involves the execution of a transaction by the Cold Wallet, calling the ERC721Delegation function within the `DelegationIndexer.sol` contract. [See tx](https://mumbai.polygonscan.com/tx/0x128f5b0b0c3a719154dcc7e9e91e256cdc2f2afab812646b9576cbc2f29b8af6)
+4. Following the delegation, the Hot Wallet gains the capability to act on behalf of the Cold Wallet and claim the airdrop. [See tx](https://mumbai.polygonscan.com/tx/0xe130dac5c9b86eae4df864ce255a95fed13b0cd7a3a5ee77e1fc74686c3a931f)
 
 ## Testing
 All functions in the protocol have tests implemented. To execute these tests:
