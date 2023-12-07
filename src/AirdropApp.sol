@@ -44,5 +44,6 @@ contract AirdropApp is ERC20 {
         ) revert NotElegible();
 
         _mint(msg.sender, airdropTokenAmount);
+        emit AirdropClaimed(msg.sender);
     }
 }
