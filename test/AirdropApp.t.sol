@@ -53,5 +53,64 @@ contract TestAirdropApp is Test {
         assert(airdropApp.balanceOf(hotWallet) == aidropTokenAmount);
     }
 
+    function testColdWalletCanClaimAirdropAfterDelegatingToHotWallet() public {
+        vm.prank(coldWallet);
+        delegationIndexer.ERC721Delegation(hotWallet, address(mockERC721), tokenId, true);
 
+        vm.prank(coldWallet);
+        airdropApp.claimAirdrop();
+        assert(airdropApp.balanceOf(coldWallet) == aidropTokenAmount);
+    }
+
+    function testColdWalletCanNotClaimTwice() public {
+        vm.prank(coldWallet);
+        airdropApp.claimAirdrop();
+        assert(airdropApp.balanceOf(coldWallet) == aidropTokenAmount);
+
+        vm.expectRevert();
+        airdropApp.claimAirdrop();
+    }
+
+    function testHotWalletCanNotClaimTwice() public {
+        vm.prank(coldWallet);
+
+        delegationIndexer.ERC721Delegation(hotWallet, address(mockERC721), tokenId, true);
+        vm.stopPrank();
+
+        vm.prank(hotWallet);
+        airdropApp.claimAirdrop();
+        assert(airdropApp.balanceOf(hotWallet) == aidropTokenAmount);
+
+        vm.prank(hotWallet);
+        vm.expectRevert();
+        airdropApp.claimAirdrop();
+    }
+
+    function testHotWalletCanNotClaimAfterColdHasClaimed() public {
+        vm.prank(coldWallet);
+        airdropApp.claimAirdrop();
+        assert(airdropApp.balanceOf(coldWallet) == aidropTokenAmount);
+
+        vm.prank(coldWallet);
+        delegationIndexer.ERC721Delegation(hotWallet, address(mockERC721), tokenId, true);
+        vm.stopPrank();
+
+        vm.prank(hotWallet);
+        vm.expectRevert();
+        airdropApp.claimAirdrop();
+    }
+
+    function testColdWalletCanNotClaimAfterHotHasClaimed() public {
+        vm.prank(coldWallet);
+        delegationIndexer.ERC721Delegation(hotWallet, address(mockERC721), tokenId, true);
+        vm.stopPrank();
+
+        vm.prank(hotWallet);
+        airdropApp.claimAirdrop();
+        assert(airdropApp.balanceOf(hotWallet) == aidropTokenAmount);
+
+        vm.prank(coldWallet);
+        vm.expectRevert();
+        airdropApp.claimAirdrop();
+    }
 }
