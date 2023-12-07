@@ -18,7 +18,7 @@ The protocol has been implemented using three main contracts:
 
 The protocol enables the execution of two types of actions: delegating ERC721 tokens and verifying if an ERC721 token has been delegated.
 
-1. Delegate ERC721: for delegating ERC721 the `ERC721Delegation` must be called. [Check interface](https://github.com/JMariadlcs/delegated-wallet/blob/main/src/interfaces/IDelegationIndexer.sol)
+1. Delegate ERC721: for delegating ERC721 the `ERC721Delegation` function must be called. [Check interface](https://github.com/JMariadlcs/delegated-wallet/blob/main/src/interfaces/IDelegationIndexer.sol#L6-L14)
 
 ```bash
     /** 
@@ -30,6 +30,20 @@ The protocol enables the execution of two types of actions: delegating ERC721 to
      * @dev function returns the delegation hash generated (bytes32 type)
      */
     function ERC721Delegation(address to, address contractAddress, uint256 tokenId, bool activeDelegation) external returns (bytes32);
+```
+
+2. Verify ERC721 delegation: for verifying if a specific ERC721 token has been delegated to a certain address the `checkERC721Delegation` function much be called. [Check interface](https://github.com/JMariadlcs/delegated-wallet/blob/main/src/interfaces/IDelegationIndexer.sol#_16-L24)
+
+```bash
+    /** 
+     * @notice function for checking if an ERC721 token delegation is active
+     * @param from ColdWallet address of the wallet that contains the ERC721 token
+     * @param to HotWallet address to be delegated
+     * @param contractAddress address of the ERC721 delegated
+     * @param tokenId Id of the ERC721 token delegated
+     * @dev function returns a boolean indicating if the delegation is active or not
+     */
+    function checkERC721Delegation(address from, address to, address contractAddress, uint256 tokenId) external view returns(bool);
 ```
 
 ## Execution example
