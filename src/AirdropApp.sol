@@ -7,6 +7,7 @@ import "../lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol";
 import "./interfaces/IDelegationIndexer.sol";
 
 error NotElegible();
+error AlreadyClaimed();
 
 contract AirdropApp is ERC20 {
 
@@ -14,6 +15,7 @@ contract AirdropApp is ERC20 {
     address ERC721ContractAddress;
     uint256 tokenId;
     uint256 airdropTokenAmount;
+    mapping(address => bool) alreadyClaimed;
 
     event AirdropClaimed(address receiver);
     
@@ -38,6 +40,7 @@ contract AirdropApp is ERC20 {
     /// @notice function for claiming airdrop. Owners of ERC721 and tokenId or delegated addresses by owners are elegible
     function claimAirdrop() external {
         address ERC721Owner = ERC721(ERC721ContractAddress).ownerOf(tokenId);
+        if (alreadyClaimed[ERC721Owner]) revert AlreadyClaimed();
         
         if (
             msg.sender != ERC721Owner &&
@@ -49,6 +52,7 @@ contract AirdropApp is ERC20 {
             )
         ) revert NotElegible();
 
+        alreadyClaimed[ERC721Owner] = true;
         _mint(msg.sender, airdropTokenAmount);
         emit AirdropClaimed(msg.sender);
     }
